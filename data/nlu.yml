@@ -1,5 +1,4 @@
 version: "3.1"
-
 nlu:
 - intent: greet
   examples: |
@@ -16,7 +15,6 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
-
 - intent: goodbye
   examples: |
     - cu
@@ -29,7 +27,6 @@ nlu:
     - see you around
     - bye bye
     - see you later
-
 - intent: affirm
   examples: |
     - yes
@@ -38,7 +35,6 @@ nlu:
     - of course
     - that sounds good
     - correct
-
 - intent: deny
   examples: |
     - no
@@ -48,7 +44,6 @@ nlu:
     - don't like that
     - no way
     - not really
-
 - intent: mood_great
   examples: |
     - perfect
@@ -65,7 +60,6 @@ nlu:
     - so so perfect
     - so good
     - so perfect
-
 - intent: mood_unhappy
   examples: |
     - my day was horrible
@@ -82,10 +76,48 @@ nlu:
     - extremly sad
     - so saad
     - so sad
-
 - intent: bot_challenge
   examples: |
     - are you a bot?
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+- intent: inform_rps
+  examples: |
+    - [rock](choice)
+    - [paper](choice)
+    - [scissors](choice)
+- intent: play_rps
+  examples: |
+    - let's play rock paper scissors
+    - play rps
+    - play rock paper scissors
+- intent: request_create_mr_form
+  examples: |
+    - i'd like to create merge requests
+    - create mr
+    - create a merge request from [develop](source_branch) to [release](target_branch)
+    - create mr in [ingestion-pipeline](repo_name)
+    - create mr for [ldap-connection-status-ingestion-pipeline](repo_name) from [feature-name](source_branch) to [develop](target_branch)
+    - create merge request, source: [first](source_branch), target: [develop](target_branch), project name: [chatops](repo_name)
+    - create_mr [init](source_branch) to [develop](target_branch) in [experiments-repo](repo_name)
+    - create mr for [chatops](repo_name)
+    - create merge request from [whatev](source_branch) to [initial](target_branch)
+    - create_mr, source is [experiment](source_branch), target is [develop](target_branch)
+    - create mr from [develop](source_branch) to [release](target_branch)
+    - [develop](target_branch)
+    - [init](source_branch)
+- intent: inform_mr_source_branch
+  examples: |
+    - [branch_name](source_branch)
+    - the source branch is [create_mr](source_branch)
+- intent: inform_mr_target_branch
+  examples: |
+    - [branch_name](target_branch)
+    - the target branch is [release](target_branch)
+- intent: inform_mr_repo_name
+  examples: |
+    - [repo-name](repo_name)
+    - the project name is [experiments-repo](repo_name)
+    - the repo is [ldap-connection-status-ingestion-pipeline](repo_name)
+    - [alert-validation](repo_name)

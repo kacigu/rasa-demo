@@ -1,34 +1,90 @@
-version: "3.1"
-
+version: '3.1'
 intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
-
+- affirm
+- bot_challenge
+- deny
+- goodbye
+- greet
+- inform_mr_repo_name
+- inform_mr_source_branch
+- inform_mr_target_branch
+- inform_rps
+- mood_great
+- mood_unhappy
+- play_rps
+- request_create_mr_form
+entities:
+- target_branch
+- source_branch
+- repo_name
+- choice
+slots:
+  choice:
+    type: categorical
+    values:
+    - rock
+    - paper
+    - scissors
+    mappings:
+    - type: from_entity
+      entity: choice
+  source_branch:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: source_branch
+  target_branch:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: target_branch
+  repo_name:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: repo_name
+forms:
+  create_mr_form:
+    required_slots:
+    - target_branch
+    - source_branch
+    - repo_name
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
-
+  - text: Hey! How are you?
   utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
   utter_did_that_help:
-  - text: "Did that help you?"
-
+  - text: Did that help you?
   utter_happy:
-  - text: "Great, carry on!"
-
+  - text: Great, carry on!
   utter_goodbye:
-  - text: "Bye"
-
+  - text: Bye
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
-
+  - text: I am a bot, powered by Rasa.
+  utter_play_rps:
+  - text: Type 'rock', 'paper', or 'scissors' to play.
+  utter_play_again:
+  - text: Do you wnat to play again?
+  utter_submit_create_mr_form:
+  - text: Creating mr from {source_branch} to {target_branch} for {repo_name}.
+  utter_ask_source_branch:
+  - text: What is the name of the source branch?
+  utter_ask_target_branch:
+  - text: What is the name of the target branch?
+  utter_ask_repo_name:
+  - text: What is the name of your repository?
+actions:
+- action_play_rps
+- utter_ask_repo_name
+- utter_ask_source_branch
+- utter_ask_target_branch
+- utter_goodbye
+- utter_submit_create_mr_form
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

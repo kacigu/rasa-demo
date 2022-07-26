@@ -11,3 +11,46 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+- rule: Activate create_mr Form
+  steps:
+  - intent: request_create_mr_form
+  - action: create_mr_form
+  - active_loop: create_mr_form
+
+- rule: Submit create_mr Form
+  condition: 
+  - active_loop: create_mr_form
+  steps:
+  - action: create_mr_form
+  - active_loop: null
+  - slot_was_set: 
+    - requested_slot: null
+  - action: utter_submit_create_mr_form
+
+- rule: ask for source branch
+  condition:
+  - active_loop: create_mr_form
+  steps:
+  - action: utter_ask_source_branch
+  - intent: inform_mr_source_branch
+  - slot_was_set:
+    - source_branch: {source_branch}
+
+- rule: ask for target branch
+  condition:
+  - active_loop: create_mr_form
+  steps:
+  - action: utter_ask_target_branch
+  - intent: inform_mr_target_branch
+  - slot_was_set:
+    - source_branch: {target_branch}
+
+- rule: ask for repo name
+  condition:
+  - active_loop: create_mr_form
+  steps:
+  - action: utter_ask_repo_name
+  - intent: inform_mr_repo_name
+  - slot_was_set:
+    - source_branch: {repo_name}

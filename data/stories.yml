@@ -28,3 +28,109 @@ stories:
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
+
+- story: initiate rps game
+  steps:
+  - intent: play_rps
+  - action: utter_play_rps
+  - intent: inform_rps
+  - action: action_play_rps
+  - action: utter_play_again
+
+- story: play rps again
+  steps:
+    - action: utter_play_again
+    - intent: affirm
+    - action: utter_play_rps
+
+- story: don't play again
+  steps:
+    - action: utter_play_again
+    - intent: deny
+    - action: utter_goodbye
+
+- story: interactive create_mr
+  steps:
+  - intent: request_create_mr_form
+  - action: create_mr_form
+  - active_loop: create_mr_form
+  - slot_was_set:
+    - requested_slot: repo_name
+  - slot_was_set:
+    - repo_name: chatops
+  - slot_was_set:
+    - requested_slot: source_branch
+  - slot_was_set:
+    - source_branch: initial-commit
+  - slot_was_set:
+    - requested_slot: target_branch
+  - slot_was_set:
+    - target_branch: develop
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_submit_create_mr_form
+  - intent: goodbye
+  - action: utter_goodbye
+- story: interactive_story_1
+  steps:
+  - intent: request_create_mr_form
+    entities:
+    - repo_name: chatops
+  - slot_was_set:
+    - repo_name: chatops
+  - action: create_mr_form
+  - active_loop: create_mr_form
+  - slot_was_set:
+    - repo_name: chatops
+  - slot_was_set:
+    - requested_slot: target_branch
+  - slot_was_set:
+    - target_branch: develop
+  - slot_was_set:
+    - requested_slot: source_branch
+  - slot_was_set:
+    - source_branch: initial
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_submit_create_mr_form
+  - intent: request_create_mr_form
+    entities:
+    - source_branch: whatev
+    - target_branch: initial
+  - action: create_mr_form
+  - active_loop: create_mr_form
+  - slot_was_set:
+    - source_branch: whatev
+  - slot_was_set:
+    - target_branch: initial
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_submit_create_mr_form
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: interactive_story_1
+  steps:
+  - intent: request_create_mr_form
+  - action: create_mr_form
+  - active_loop: create_mr_form
+  - slot_was_set:
+    - requested_slot: target_branch
+  - slot_was_set:
+    - target_branch: develop
+  - slot_was_set:
+    - requested_slot: source_branch
+  - slot_was_set:
+    - source_branch: init
+  - slot_was_set:
+    - requested_slot: repo_name
+  - intent: inform_mr_repo_name
+    entities:
+    - repo_name: alert-validation
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_submit_create_mr_form
